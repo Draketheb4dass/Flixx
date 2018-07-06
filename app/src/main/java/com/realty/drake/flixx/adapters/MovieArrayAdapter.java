@@ -17,39 +17,47 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {
         super(context, R.layout.item_movie, movies );
     }
 
-    private static class ViewHolder {
+     static class ViewHolder {
+        @BindView(R.id.ivMovieImage)
         ImageView posterPath;
+        @BindView(R.id.tvTitle)
         TextView originalTitle;
+        @BindView(R.id.tvOverview)
         TextView overview;
 
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+
+        }
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         //get the data for position
         Movie movie = getItem(position);
 
         ViewHolder viewHolder;
         //Check if existing use being reuse
-        if(convertView == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_movie, parent, false);
-            viewHolder.posterPath = (ImageView) convertView.findViewById(R.id.ivMovieImage);
-            viewHolder.originalTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-            viewHolder.overview = (TextView) convertView.findViewById(R.id.tvOverview);
-
-            // Cache the viewHolder object inside the fresh view
-            convertView.setTag(viewHolder);
-        } else {
+        if(convertView != null) {
             //View is being recycled, retrieve the viewHolder object from tag
             viewHolder = (ViewHolder) convertView.getTag();
+
+        } else {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.item_movie, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            // Cache the viewHolder object inside the fresh view
+            convertView.setTag(viewHolder);
 
 
         }
