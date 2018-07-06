@@ -1,7 +1,9 @@
 package com.realty.drake.flixx.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +45,18 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         tvTitle.setText(movie.getOriginalTitle());
         tvOverview.setText(movie.getOverview());
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(ivImage);
+        //Loading circle for placeholder, ColorAccent has been used
+        CircularProgressDrawable progressDrawable =
+                new CircularProgressDrawable(getContext());
+        progressDrawable.setStrokeWidth(5f);
+        progressDrawable.setCenterRadius(30f);
+        progressDrawable.setColorSchemeColors(Color.argb(255,0,150,136));
+        progressDrawable.start();
+
+        Picasso.with(getContext())
+                .load(movie.getPosterPath())
+                .placeholder(progressDrawable)
+                .into(ivImage);
 
         //Return the View
         return  convertView;
