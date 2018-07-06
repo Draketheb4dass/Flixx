@@ -20,30 +20,49 @@ import java.util.List;
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     public MovieArrayAdapter(Context context, List<Movie> movies) {
-        super(context, android.R.layout.simple_list_item_1, movies );
+        super(context, R.layout.item_movie, movies );
+    }
+
+    private static class ViewHolder {
+        ImageView posterPath;
+        TextView originalTitle;
+        TextView overview;
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //get the data for position
         Movie movie = getItem(position);
+
+        ViewHolder viewHolder;
         //Check if existing use being reuse
         if(convertView == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.item_movie, parent, false);
+            viewHolder.posterPath = (ImageView) convertView.findViewById(R.id.ivMovieImage);
+            viewHolder.originalTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+            viewHolder.overview = (TextView) convertView.findViewById(R.id.tvOverview);
+
+            // Cache the viewHolder object inside the fresh view
+            convertView.setTag(viewHolder);
+        } else {
+            //View is being recycled, retrieve the viewHolder object from tag
+            viewHolder = (ViewHolder) convertView.getTag();
+
+
         }
 
-        //bind ImageView
-        ImageView ivImage = convertView.findViewById(R.id.ivMovieImage);
-        //clear out image from convertView
-        ivImage.setImageResource(0);
 
-        TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
-        TextView tvOverview = (TextView) convertView.findViewById(R.id.tvOverview);
 
-        //populate data
-        tvTitle.setText(movie.getOriginalTitle());
-        tvOverview.setText(movie.getOverview());
+        //Populate the data from the data object via the viewHolder object
+        //into the template view.
+
+        viewHolder.originalTitle.setText(movie.getOriginalTitle());
+        viewHolder.overview.setText(movie.getOverview());
+        // Return the completed view to render on screen
+
 
         //Loading circle for placeholder, ColorAccent has been used
         CircularProgressDrawable progressDrawable =
@@ -56,7 +75,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         Picasso.with(getContext())
                 .load(movie.getPosterPath())
                 .placeholder(progressDrawable)
-                .into(ivImage);
+                .into(viewHolder.posterPath);
 
         //Return the View
         return  convertView;
