@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
@@ -80,6 +81,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         Picasso.with(getContext())
                 .load(movie.getPosterPath())
+                .transform(new RoundedCornersTransformation(10, 10))
                 .placeholder(progressDrawable)
                 .into(viewHolder.posterPath);
 
