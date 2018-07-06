@@ -34,7 +34,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         @BindView(R.id.tvOverview)
         TextView overview;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
 
         }
@@ -66,11 +66,9 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         //Populate the data from the data object via the viewHolder object
         //into the template view.
-
+        assert movie != null;
         viewHolder.originalTitle.setText(movie.getOriginalTitle());
         viewHolder.overview.setText(movie.getOverview());
-        // Return the completed view to render on screen
-
 
         //Loading circle for placeholder, ColorAccent has been used
         CircularProgressDrawable progressDrawable =
