@@ -1,13 +1,17 @@
 package com.realty.drake.flixx;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.realty.drake.flixx.adapters.MovieArrayAdapter;
+import com.realty.drake.flixx.dialogs.MovieDetailDialog;
 import com.realty.drake.flixx.models.Movie;
 
 import org.json.JSONArray;
@@ -54,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+            }
+        });
+
+        lvItems.setOnClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), MovieDetailActivity.class);
+
             }
         });
     }
