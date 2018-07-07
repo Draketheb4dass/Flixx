@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.realty.drake.flixx.adapters.MovieArrayAdapter;
-import com.realty.drake.flixx.dialogs.MovieDetailDialog;
 import com.realty.drake.flixx.models.Movie;
 
 import org.json.JSONArray;
@@ -61,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        lvItems.setOnClickListener(new AdapterView.OnItemClickListener(){
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(getApplicationContext(), MovieDetailActivity.class);
 
             }
         });
+
     }
 }

@@ -1,6 +1,7 @@
 package com.realty.drake.flixx.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.CircularProgressDrawable;
@@ -29,7 +30,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
      static class ViewHolder {
         @BindView(R.id.ivMovieImage)
-        ImageView posterPath;
+        ImageView MovieImage;
         @BindView(R.id.tvTitle)
         TextView originalTitle;
         @BindView(R.id.tvOverview)
@@ -37,7 +38,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
-
         }
     }
 
@@ -55,15 +55,14 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
         } else {
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.item_movie, parent, false);
+            convertView = inflater
+                    .inflate(R.layout.item_movie, parent, false);
             viewHolder = new ViewHolder(convertView);
             // Cache the viewHolder object inside the fresh view
             convertView.setTag(viewHolder);
 
 
         }
-
-
 
         //Populate the data from the data object via the viewHolder object
         //into the template view.
@@ -76,18 +75,32 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 new CircularProgressDrawable(getContext());
         progressDrawable.setStrokeWidth(5f);
         progressDrawable.setCenterRadius(30f);
-        progressDrawable.setColorSchemeColors(Color.argb(255,0,150,136));
+        progressDrawable
+                .setColorSchemeColors(Color.argb(255,0,150,136));
         progressDrawable.start();
 
-        Picasso.with(getContext())
-                .load(movie.getPosterPath())
-                .transform(new RoundedCornersTransformation(10, 10))
-                .placeholder(progressDrawable)
-                .into(viewHolder.posterPath);
+        //Load specific image depending on orientation(poster or dropback)
+        int orientation = getContext().getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Picasso.with(getContext())
+                    .load(movie.getPosterPath())
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .placeholder(progressDrawable)
+                    .into(viewHolder.MovieImage);
+
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Picasso.with(getContext())
+                    .load(movie.getBackdropPath())
+                    .transform(new RoundedCornersTransformation(10, 10))
+                    .placeholder(progressDrawable)
+                    .into(viewHolder.MovieImage);
+        }
 
         //Return the View
         return  convertView;
 
     }
+
+
 }
 
