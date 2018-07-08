@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lvItems = (ListView) findViewById(R.id.lvMovies);
+        lvItems = findViewById(R.id.lvMovies);
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);

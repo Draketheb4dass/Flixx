@@ -11,13 +11,16 @@ public class Movie {
     private String originalTitle;
     private String overview;
     private String backdropPath;
+    private float ratingBar;
+
 
     //Constructor that extract fields from JsonObject
-    public Movie(JSONObject jsonObject) throws JSONException{
+    public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.ratingBar = jsonObject.getLong("vote_average");
     }
 
     //Getters
@@ -32,6 +35,9 @@ public class Movie {
     }
     public String getBackdropPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
+    }
+    public float getRatingBar() {
+        return ratingBar;
     }
 
     //Iterate through arrayList
