@@ -65,9 +65,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Intent send Parcel to Detail Activity
-                Intent parcelIntent = new Intent(getApplicationContext(), MovieDetailActivity.class);
+                Intent parcelIntent = new Intent(getApplication(), MovieDetailActivity.class);
                 parcelIntent.putExtra("Movie", movies);
-                getApplicationContext().startActivity(parcelIntent);
+                parcelIntent.putExtra("position", position);
+                parcelIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(parcelIntent);
 
             }
         });
