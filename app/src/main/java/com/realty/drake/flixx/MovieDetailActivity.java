@@ -24,7 +24,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     @BindView(R.id.ratingBar) RatingBar rbBar;
     @BindView(R.id.tvTitle) TextView tvTitle;
     @BindView(R.id.tvPopularity) TextView tvPopularity;
-    @BindView(R.id.ibPoster) ImageButton ibPoster;
+    @BindView(R.id.ibPoster) ImageView ibPoster;
 
 
 
