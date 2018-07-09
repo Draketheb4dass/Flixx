@@ -62,7 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .setColorSchemeColors(Color.argb(255,0,150,136));
         progressDrawable.start();
 
-
+        //Display the image
         Picasso.with(this)
                 .load(Movie.get(position).getBackdropPath())
                 .placeholder(progressDrawable)
