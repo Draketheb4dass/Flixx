@@ -39,11 +39,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://imgur.com/a/YUC92RE.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/YUC92RE.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [ffmpeg](https://www.ffmpeg.org/)
+
+GIF created with [ffmpeg](https://www.ffmpeg.org/).
                            
-).
 
 
 ## Notes
@@ -55,8 +55,7 @@ Describe any challenges encountered while building the app.
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
 - [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
 - [ButterKnife](http://jakewharton.github.io/butterknife/) - View binder library for Android
-                 
-)
+                
 
 ## License
 
