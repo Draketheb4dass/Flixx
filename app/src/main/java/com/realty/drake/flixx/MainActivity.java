@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
 
-        String url =
+        final String MOVIE_API_URI =
                 "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url, new JsonHttpResponseHandler(){
+        client.get(MOVIE_API_URI, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray movieJsonResults = null;
@@ -60,12 +60,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Intent send Parcel to Detail Activity
+                Intent parcelIntent = new Intent(getApplicationContext(), MovieDetailActivity.class);
+                parcelIntent.putExtra("Movie", movies);
+                getApplicationContext().startActivity(parcelIntent);
 
             }
         });
+
+
 
     }
 }
